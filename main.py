@@ -1,8 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from io import BytesIO
-from PIL import Image, ImageTk
-from datetime import datetime, timedelta
+
 
 def strike(text):
     result = ''
@@ -10,17 +8,8 @@ def strike(text):
         result = result + c + '\u0336'
     return result
 
-
-def show_image(url, s):
-    response = s.get(url)
-    load = Image.open(BytesIO(response.content))
-    render = ImageTk.PhotoImage(load)
-    img = Label(self, image=render)
-    img.image = render
-    img.place(x=0, y=0)
-
-
 def get_titles(deals):
+    #print(type(deals))
     titles = deals.find_all("a", href = True)
     titles_text = [title["title"][4:] for title in titles]
     return titles_text
@@ -47,13 +36,16 @@ def get_mmoga_deals():
     s = requests.Session()
     url = "https://www.mmoga.com"
     html_text = s.get(url).text
-    soup = BeautifulSoup(html_text, "lxml")
-    deals = soup.find("div", class_ = "row")
 
+    soup = BeautifulSoup(html_text, "lxml")
+    #print(soup)
+    deals = soup.find("div", class_ = "row")
+    #print(deals)
     titles = get_titles(deals)
     old_prices, new_prices = get_prices(deals)
     output_sales(titles, old_prices, new_prices)
 
+    
 
 if __name__ == '__main__':
     get_mmoga_deals()
