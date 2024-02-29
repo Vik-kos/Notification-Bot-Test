@@ -1,1 +1,1 @@
-# Small test for webscraping game deals
+# Notification for Game Deals via Discord Bot

@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-
+import pandas
 
 def strike(text):
     result = ''
@@ -26,12 +26,6 @@ def get_prices(deals):
     return old_prices, new_prices
 
 
-def output_sales(titles, old_prices, new_prices):
-    for i in range(len(titles)):
-        print(f"{titles[i]} : {new_prices[i]} | {old_prices[i]}")
-        print('*'.center(80, '*'))
-
-
 def get_mmoga_deals():
     s = requests.Session()
     url = "https://www.mmoga.com"
@@ -43,7 +37,12 @@ def get_mmoga_deals():
     #print(deals)
     titles = get_titles(deals)
     old_prices, new_prices = get_prices(deals)
-    output_sales(titles, old_prices, new_prices)
+    game_deals = {
+        'title': titles,
+        'new_price': new_prices,
+        'old_price': old_prices
+    }
+    pandas.DataFrame(game_deals).to_csv("game-deals.csv")
 
     
 
