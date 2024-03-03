@@ -4,9 +4,7 @@ WORKDIR /code
 
 COPY requirements.txt .
 
-RUN apt-get update && apt-get install ffmpeg libsm6 libxext6 -y
-
-RUN apt install tesseract-ocr -y
+RUN apt-get update && apt-get install ffmpeg libsm6 libxext6 tesseract-ocr xvfb tini -y
 
 RUN pip install -r requirements.txt
 
@@ -17,4 +15,4 @@ RUN playwright install-deps
 
 COPY ./ . 
 
-CMD ["python", "./notification_bot.py"]
+CMD ["tini", "--", "xvfb-run", "python", "./notification_bot.py"]
