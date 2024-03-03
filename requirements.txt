@@ -1,0 +1,8 @@
+beautifulsoup4==4.12.3
+py-cord==2.4.1
+opencv_python==4.9.0.80
+pandas==2.2.1
+playwright==1.41.2
+pytesseract==0.3.10
+PyYAML==6.0.1
+Requests==2.31.0

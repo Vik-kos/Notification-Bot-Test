@@ -1,6 +1,5 @@
 import discord
 from discord.commands import Option
-from dotenv import load_dotenv
 import os
 import yaml
 

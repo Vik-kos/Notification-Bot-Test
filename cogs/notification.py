@@ -2,7 +2,7 @@ from discord.ext import commands, tasks
 from discord.commands import slash_command
 import discord
 import os
-import logging
+#import logging
 from datetime import datetime
 
 from cogs.helperfunctions.img_handler import prepare_deal_imgs
